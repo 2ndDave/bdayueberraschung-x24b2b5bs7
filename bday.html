@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Für universelle Skalierung auf allen Geräten -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eine kleine Überraschung für dich ❤️</title>
+<meta name="robots" content="noindex, nofollow" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f0f12;
+      color: #ffffff;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Universelle Karte */
+    .card-container {
+      position: relative;
+      width: 90%;
+      max-width: 420px;
+      height: 85vh;
+      max-height: 700px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: #1a1a1a;
+    }
+
+    /* Einzelne Szenen/Folien */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* KOMPLETT TRANSPARENTE BOX */
+    .overlay {
+      background: transparent; /* Komplett unsichtbare Box */
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    /* Starke Textschatten, damit die Schrift auf JEDEM Bild lesbar ist */
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #ffb6c1;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.7);
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-weight: 500;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Eingabefeld mit leichter Transparenz */
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 2px solid #ffb6c1;
+      background: rgba(255, 255, 255, 0.85); /* Leicht transparentes Weiß */
+      color: #111;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      margin-bottom: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Button mit starkem Schatten */
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff6b81, #ff4757);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 71, 87, 0.6);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* Fehlermeldung */
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+      min-height: 20px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Gutschein-Bild */
+    .gift-image {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      border: 2px solid #ffb6c1;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+
+    /* Anpassung für sehr kleine Displays */
+    @media (max-height: 600px) {
+      .card-container {
+        height: 95vh;
+      }
+      h2 { font-size: 1.2rem; }
+      p { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+
+    <!-- SEITE 0: STARTSEITE / BEGRÜSSUNG -->
+    <div class="slide active" style="background-image: url('1.jpg');">
+      <div class="overlay">
+        <h2>Happy Birthday! 🎉🥳</h2>
+        <p>Für dein Geschenk bist du wenige Fragen entfernt...</p>
+        <button onclick="nextSlide(2)">Spiel starten 💖</button>
+      </div>
+    </div>
+
+    <!-- SEITE 1: Frage 1 -->
+    <div class="slide" style="background-image: url('2.jpg');">
+      <div class="overlay">
+        <h2>Frage 1 von 5 🌸</h2>
+        <p>Was ist unser Jahrestag? "Tag Monat Jahr"</p>
+        <input type="text" id="answer1" placeholder="Monat eingeben..." />
+        <button onclick="checkAnswer(1, ['27.03.2024'])">Weiter ✨</button>
+        <div class="error-msg" id="error1"></div>
+      </div>
+    </div>
+
+    <!-- SEITE 2: Frage 2 -->
+    <div class="slide" style="background-image: url('3.jpg');">
+      <div class="overlay">
+        <h2>Richtig! ❤️ Frage 2 von 5</h2>
+        <p>In welchem Monat war unser erster Kuss?</p>
+        <input type="text" id="answer2" placeholder="Ort / Land..." />
+        <button onclick="checkAnswer(2, ['februar', '02'])">Weiter ✨</button>
+        <div class="error-msg" id="error2"></div>
+      </div>
+    </div>
+
+    <!-- SEITE 3: Frage 3 -->
+    <div class="slide" style="background-image: url('4.jpg');">
+      <div class="overlay">
+        <h2>Du bist super! 💋 Frage 3 von 5</h2>
+        <p>Was mag ich an dir am liebsten?</p>
+        <input type="text" id="answer3" placeholder="Antwort..." />
+        <button onclick="checkAnswer(3, ['augen', 'lächeln', 'arsch', 'titten', 'brüste', 'haare', 'charakter', 'liebevoll'])">Weiter ✨</button>
+        <div class="error-msg" id="error3"></div>
+      </div>
+    </div>
+
+    <!-- SEITE 4: Frage 4 -->
+    <div class="slide" style="background-image: url('5.jpg');">
+      <div class="overlay">
+        <h2>Fast geschafft! 🌹 Frage 4 von 5</h2>
+        <p>Welcher Urlaub war bis jetzt am schönsten?</p>
+        <input type="text" id="answer4" placeholder="Name..." />
+        <button onclick="checkAnswer(4, ['mexico', 'malle', 'mallorca', 'österreich', 'walchensee', 'ägypten'])">Weiter ✨</button>
+        <div class="error-msg" id="error4"></div>
+      </div>
+    </div>
+
+    <!-- SEITE 5: Frage 5 -->
+    <div class="slide" style="background-image: url('6.jpg');">
+      <div class="overlay">
+        <h2>Die letzte Hürde! 💖 Frage 5 von 5</h2>
+        <p>Wer macht die besten Fotos der Welt?</p>
+        <input type="text" id="answer5" placeholder="..." />
+        <button onclick="checkAnswer(5, ['du', 'ich', 'mia', 'david'])">Weiter ✨</button>
+        <div class="error-msg" id="error5"></div>
+      </div>
+    </div>
+
+    <!-- SEITE 6: Glückwunsch & Liebesbrief -->
+    <div class="slide" style="background-image: url('7.jpg');">
+      <div class="overlay">
+        <h2>Geschafft, mein Engel! 🎉</h2>
+        <p>
+          Du hast alle Fragen perfekt beantwortet!<br>
+           Auch wenn wir gerade getrennt sind, 
+          bist du mir näher als jeder andere Mensch. Ich liebe dich unendlich!<br>
+           Ich wünsche dir hiermit alles Gute der Welt das du so bleibst wie du bist, denn so bist du perfekt und genauso Liebe ich dich! ❤️<br>
+          Ich wünsche dir viel Geld für noch mehr Reisen, unendliche Gesundheit, und das ich weiterhin der beste Freund an deiner bin! ❤️
+        </p>
+        <button onclick="nextSlide(8)">Dein Geschenk ansehen 🎁</button>
+      </div>
+    </div>
+
+    <!-- SEITE 7: Geschenk & Hotelbuchung -->
+    <div class="slide" style="background-image: url('8.jpg');">
+      <div class="overlay">
+        <h2>Zeit für Entspannung! 🧘‍♀️✨</h2>
+        <img src="geschenk.jpg" alt="Geschenk" class="gift-image" />
+        <p>
+          Wir fahren zusammen ins Wellness-Hotel! ❤️ <br>
+          & schauen uns das Feuerwerk an der Silvesternacht über Prag an! ❤️
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function checkAnswer(step, validAnswers) {
+      const input = document.getElementById(`answer${step}`).value.trim().toLowerCase();
+      const errorDiv = document.getElementById(`error${step}`);
+
+      const isCorrect = validAnswers.some(ans => input.includes(ans.toLowerCase()));
+
+      if (isCorrect) {
+        errorDiv.innerText = "";
+        nextSlide(step + 2);
+      } else {
+        const sweetErrors = [
+          "Knapp daneben! Überleg nochmal Süße... 😜",
+          "Aww, das war's nicht ganz! Versuch's nochmal ❤️",
+          "Falsch! Aber ich liebe dich trotzdem. Noch ein Versuch? ✨",
+          "Hmm, schau mal genauer nach! Das weißt du doch 😉"
+        ];
+        const randomError = sweetErrors[Math.floor(Math.random() * sweetErrors.length)];
+        errorDiv.innerText = randomError;
+      }
+    }
+
+    function nextSlide(nextStep) {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[nextStep - 1].classList.add('active');
+    }
+  </script>
+</body>
+</html>
